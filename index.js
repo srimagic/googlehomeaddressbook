@@ -15,12 +15,7 @@ app.get('/', function(req, res){
 });
 
 //routes - phone book
-app.post('/phonebook/add', phoneBook.add);
-app.post('/phonebook/del', phoneBook.del);
-app.post('/phonebook/update', phoneBook.update);
-app.post('/phonebook/find', phoneBook.find);
-app.post('/phonebook/findall', phoneBook.findall);
-app.post('/phonebook/total', phoneBook.total);
+app.post('/phonebook', phoneBook.process);
 
 
 //start listening for requests

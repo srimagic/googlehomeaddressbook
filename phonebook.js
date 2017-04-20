@@ -8,6 +8,7 @@
 */
 (function(){
 	var PhoneBook = {},
+		//google response
 		response = {
 			"speech":"",
 			"displayText":"",
@@ -15,7 +16,7 @@
 			"contextOut":[],
 			"source":"Sri's phonebook"
 		},
-		getPerson = function(req){
+		getParams = function(req){
 			console.log('req');
 			console.log(req.body);
 
@@ -24,9 +25,48 @@
 			}
 			return {};
 		},
+		process = function(req, res){
+			var action = '';
+
+			//determine Google action
+			if (req.body && req.body.result && req.body.result.action){
+				action =  req.body.result.action;
+			}
+
+			//routing logic
+			switch (action){
+				case 'add':
+					add(req, res);
+					break;
+
+				case 'remove':
+					remove(req, res);
+					break;
+
+				case 'update':
+					update(req, res);
+					break;
+
+				case 'find':
+					find(req, res);
+					break;
+
+				case 'findall':
+					findall(req, res);
+					break;
+
+				case 'total':
+					total(req, res);
+					break;
+
+				default:
+					response["speech"] = response["displayText"] = "sorry, bad action. please try again!!!";
+					return res.json(response);
+			}
+		},
 		add = function(req, res){
 
-			var person = getPerson(req);
+			var person = getParams(req);
 			response["speech"] = response["displayText"] = "sorry, bad parameters. please try again!!!";
 
 			if (person && person.name) {
@@ -37,7 +77,7 @@
 			return res.json(response);
 		},
 		remove = function(req, res){
-			var person = getPerson(req);
+			var person = getParams(req);
 			response["speech"] = response["displayText"] = "sorry, bad parameters. couldn't delete. please try again!!!";
 
 			if (person && person.name) {
@@ -48,7 +88,7 @@
 			return res.json(response);
 		},
 		update = function(req, res){
-			var person = getPerson(req);
+			var person = getParams(req);
 			response["speech"] = response["displayText"] = "sorry, bad parameters. couldn't update. please try again!!!";
 
 			if (person && person.name) {
@@ -59,11 +99,11 @@
 			return res.json(response);
 		},
 		find = function(req, res){
-			var person = getPerson(req);
+			var person = getParams(req);
 			response["speech"] = response["displayText"] = "Sorry, no entry found with that name";
 
 			if (person && person.name) {
-				response["speech"] = response["displayText"] = JSON.stringify(PhoneBook[person.name]);
+				response["speech"] = response["displayText"] = PhoneBook[person.name];
 			}
 			return res.json(response);
 		},
@@ -71,7 +111,7 @@
 			response["speech"] = response["displayText"] = "Sorry, no entries found in your address book";
 
 			if (Object.keys(PhoneBook).length >0){
-				response["speech"] = response["displayText"] = JSON.stringify(PhoneBook);
+				response["speech"] = response["displayText"] = PhoneBook;
 			}
 			
 			return res.json(response);
@@ -88,12 +128,7 @@
 		}
 	;
 
-	//exposed api
-	exports.add = add;
-	exports.del = remove;
-	exports.update = update;
-	exports.find = find;
-	exports.findall = findall;
-	exports.total = total;
+	//exposed
+	exports.module = process;
 	
 })();
