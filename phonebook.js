@@ -27,14 +27,13 @@
 		add = function(req, res){
 
 			var person = getPerson(req);
-			response["speech"] = response["displayText"] = "";
+			response["speech"] = response["displayText"] = "sorry, bad parameters. please try again!!!";
 
 			if (person && person.name) {
 				PhoneBook[person.name] = person;
 				response["speech"] = response["displayText"] = "Sure. " + person.name + " has been added to your address book";
 			}
-			response["speech"] = response["displayText"] = "sorry, bad parameters. please try again!!!";
-
+			
 			return res.json(response);
 		},
 		remove = function(req, res){
