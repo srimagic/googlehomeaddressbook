@@ -2,7 +2,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     phoneBook = require('./phonebook'),
-    port = 6400
+    port = 26400
 ;
 
 //add necessary middleware
