@@ -1,9 +1,13 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
-    phoneBook = require('./phonebook'),
-    port = process.env.PORT || 5000
+    port = process.env.PORT || 5000,
+    PhoneBookList = {},
+    phoneBook = require('./phonebook')
 ;
+
+//set global phone book list
+phoneBook.setPhoneBookList(PhoneBookList);
 
 //add necessary middleware
 app.use(bodyParser.urlencoded({extended:true}));
