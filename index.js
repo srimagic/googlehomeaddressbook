@@ -23,7 +23,7 @@ app.post('/phonebook/total', phoneBook.total);
 
 
 //start listening for requests
-app.listen(port, function () {
+app.listen(process.env.port, function () {
   console.log('phonebook listening on port ' + process.env.port);
 });
 
