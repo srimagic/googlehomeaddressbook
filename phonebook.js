@@ -36,27 +36,27 @@
 			//routing logic
 			switch (action){
 				case 'add':
-					add(req, res);
+					return add(req, res);
 					break;
 
 				case 'remove':
-					remove(req, res);
+					return remove(req, res);
 					break;
 
 				case 'update':
-					update(req, res);
+					return update(req, res);
 					break;
 
 				case 'find':
-					find(req, res);
+					return find(req, res);
 					break;
 
 				case 'findall':
-					findall(req, res);
+					return findall(req, res);
 					break;
 
 				case 'total':
-					total(req, res);
+					return total(req, res);
 					break;
 
 				default:
@@ -129,6 +129,6 @@
 	;
 
 	//exposed
-	exports.module = process;
+	exports.process = process;
 	
 })();
