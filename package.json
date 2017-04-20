@@ -1,0 +1,19 @@
+{
+  "name": "addressbook",
+  "version": "0.0.0",
+  "description": "address book webhook for google assistant app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines":{
+    "node":"0.12.0",
+    "npm":"2.5.1"
+    },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "express": "~4.13.1"
+  },
+  "author": "srimagic",
+  "license": "ISC"
+}
