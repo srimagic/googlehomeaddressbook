@@ -8,9 +8,18 @@
 */
 (function(){
 	var PhoneBook = {},
+		getPerson = function(req){
+			console.log('req');
+			console.log(req.body);
+
+			if (req.body && req.body.result && req.body.result.parameters){
+				return req.body.result.parameters; 
+			}
+			return {};
+		},
 		add = function(req, res){
 
-			var person = req.body;
+			var person = getPerson(req);
 
 			if (person && person.name) {
 				PhoneBook[person.name] = person;
@@ -19,7 +28,7 @@
 			res.sendStatus(400);
 		},
 		remove = function(req, res){
-			var person = req.body;
+			var person = getPerson(req);
 
 			if (person && person.name) {
 				delete PhoneBook[person.name];
@@ -28,7 +37,7 @@
 			res.sendStatus(400);
 		},
 		update = function(req, res){
-			var person = req.body;
+			var person = getPerson(req);
 
 			if (person && person.name) {
 				PhoneBook[person.name] = person;
@@ -37,7 +46,7 @@
 			res.sendStatus(400);
 		},
 		find = function(req, res){
-			var person = req.body;
+			var person = getPerson(req);
 
 			if (person && person.name) {
 				return res.json(PhoneBook[person.name]);
