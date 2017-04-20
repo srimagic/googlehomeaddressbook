@@ -1,8 +1,7 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
-    phoneBook = require('./phonebook'),
-    port = 26400
+    phoneBook = require('./phonebook')
 ;
 
 //add necessary middleware
@@ -25,6 +24,6 @@ app.post('/phonebook/total', phoneBook.total);
 
 //start listening for requests
 app.listen(port, function () {
-  console.log('phonebook listening on port ' + port);
+  console.log('phonebook listening on port ' + process.env.port);
 });
 
